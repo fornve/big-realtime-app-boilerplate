@@ -27,3 +27,6 @@ Elements
 * Legal
 + Terms & Conditions sample
 + Privacy Policy
+
+* Scaling
+* Backups
