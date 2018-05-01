@@ -1,6 +1,13 @@
 class ControllerCore {
+	constructor(io) {
+		this.io = io;
+	}
+
 	ping(data) {
-		console.log(data);
+		if(!data.reply) {
+			throw 'No reply address';
+		}
+		this.io.emit(data.reply, {pong: true});
 	}
 }
 
