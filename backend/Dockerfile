@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 WORKDIR /backend
 COPY package.json .
 
-RUN npm install -g nodemon
+RUN npm install -g nodemon mocha
 RUN npm install
 EXPOSE 80
 

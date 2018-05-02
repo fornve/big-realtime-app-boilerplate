@@ -9,6 +9,7 @@ docker rm -f nginx-proxy-companion
 docker rm -f framework-backend
 docker rm -f framework-rabbit
 docker rm -f framework-mysql
+docker network create framework
 
 docker run -d -p 80:80 -p 443:443 \
 	--name nginx-proxy \
@@ -28,6 +29,7 @@ docker run -d \
 
 docker run -d \
 	--name framework-mysql \
+	--network framework \
 	-e MYSQL_ROOT_PASSWORD=framework \
 	-e MYSQL_DATABASE=framework \
 	-e MYSQL_USER=framework \
@@ -37,6 +39,7 @@ docker run -d \
 
 docker run -d \
 	-p 15672:15672 \
+	--network framework \
 	--hostname framework-rabbit \
 	--name framework-rabbit \
 	rabbitmq:3
@@ -49,6 +52,7 @@ docker run -td framework-rabbit rabbitmqctl set_permissions -p / admin ".*" ".*"
 cd backend &&
 docker build -t framework-backend . &&
 docker run -td --name framework-backend \
+	--network framework \
     -e RABBITMQ=framework-rabbit \
     -e MYSQL=framework-mysql \
     -e VIRTUAL_HOST=${hostname} \

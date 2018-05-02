@@ -34,7 +34,6 @@ describe('Websockets basics', () => {
 	it('Receiving', (done) => {
 		let hash = Math.random().toString(36).substring(7);
 		io.on('back-'+hash, (data) => {
-			console.log(data);
 			done();
 		});
 		
