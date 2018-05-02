@@ -41,6 +41,11 @@ docker run -d \
 	--name framework-rabbit \
 	rabbitmq:3
 
+docker run -td framework-rabbit rabbitmq-plugins enable rabbitmq_management
+docker run -td framework-rabbit rabbitmqctl add_user admin admin
+docker run -td framework-rabbit rabbitmqctl set_user_tags admin administrator
+docker run -td framework-rabbit rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+
 cd backend &&
 docker build -t framework-backend . &&
 docker run -td --name framework-backend \
