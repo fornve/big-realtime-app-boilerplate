@@ -29,4 +29,15 @@ Elements
 + Privacy Policy
 
 * Scaling
-* Backups
+
+
+Message Brokers
+===============
+
+When to keep rabbitmq and when GCP Pubsub?
+
+That decision should be done on the beginning. 
+
+RabbitMQ will be better for smaller app. A& it works in memory it has lower latency so should be cheaper to run but tougher or challenging to scale horizontally. You can run it whenever you want.
+
+Pubsub is reliable and does not require maitenance from your side. It has quite big free tier which would be enough for development. Pricing is based on amount of data processed - so consider it during development.
