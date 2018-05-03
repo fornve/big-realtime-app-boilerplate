@@ -1,6 +1,7 @@
 const express = require('express')
 const socket = require('socket.io');
 const ioserver = require('./ioserver');
+const workers = require('./workers/index');
 const app = express()
 const port = 8080;
 console.log('Starting server');
