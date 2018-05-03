@@ -3,7 +3,8 @@
 const chai = require('chai');
 const assert = require('assert');
 const chaiHttp = require('chai-http');
-const server = require('../../index');
+//const server = require('../../index');
+const server = 'http://framework-backend:8080';
 chai.use(chaiHttp);
 
 describe('/ Get basics', () => {

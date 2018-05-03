@@ -3,7 +3,7 @@ const socket = require('socket.io');
 const ioserver = require('./ioserver');
 const app = express()
 const port = 8080;
-
+console.log('Starting server');
 app.get('/', (req, res) => res.send('Hello World!'))
 
 let server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))

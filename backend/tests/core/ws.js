@@ -3,7 +3,6 @@
 const chai = require('chai');
 const assert = require('assert');
 const chaiHttp = require('chai-http');
-const server = require('../../index');
 const ioserver = require('../../ioserver');
 const socket = require('socket.io-client');
 const iosocket = require('socket.io').listen(3001);
