@@ -35,7 +35,7 @@ docker run -d \
 	-e MYSQL_USER=framework \
 	-e MYSQL_PASSWORD=framework \
 	-v ${path}/mysql:/var/lib/mysql \
-	mysql
+	mysql:5.7
 
 docker run -d \
 	-p 15672:15672 \

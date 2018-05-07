@@ -51,7 +51,7 @@ describe('RabbitMQ basics', function(){
 	it('Read', (done) => {
 		channel.consume(channel_name, (message) => {
 			console.log(" [x] Received %s", message.content.toString());
-			channel.ack(message);
+//			channel.ack(message);
 			done();
 		}, {noAck: true});
 	});

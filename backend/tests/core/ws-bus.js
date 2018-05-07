@@ -3,18 +3,18 @@
 const chai = require('chai');
 const assert = require('assert');
 const chaiHttp = require('chai-http');
-const ioserver = require('../../ioserver');
+//const ioserver = require('../../ioserver');
 const socket = require('socket.io-client');
-const iosocket = require('socket.io').listen(3002);
+//const iosocket = require('socket.io').listen(3002);
 chai.use(chaiHttp);
 
 let io;
 
 describe('Websockets +bus', () => {
 	before(() => {
-		ioserver(iosocket);	
+	//	ioserver(iosocket);
 
-		io = new socket('http://localhost:3002');
+		io = new socket('http://localhost:3001');
 		io.connect();
 	});
 
@@ -28,6 +28,7 @@ describe('Websockets +bus', () => {
 	it('Receiving', (done) => {
 		let hash = Math.random().toString(36).substring(7);
 		io.on('back-'+hash, (data) => {
+		    console.log(data)
 			done();
 		});
 		

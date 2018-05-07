@@ -12,8 +12,10 @@ let io;
 
 describe('Websockets basics', () => {
 	before(() => {
-		ioserver(iosocket);	
-
+        require('../../services/init').then(services => {
+        	services.io = iosocket;
+            ioserver(services);
+        });
 		io = new socket('http://localhost:3001');
 		io.connect();
 	});

@@ -7,10 +7,13 @@ const port = 8080;
 console.log('Starting server');
 app.get('/', (req, res) => res.send('Hello World!'))
 
-let server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-let io = socket(server);
-ioserver(io);
+let server;
 
-console.log('Server & WS started' );
+require('./services/init').then(services => {
+    server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+    services.io = socket(server);
+    ioserver(services);
+    console.log('Server & WS started' );
+}).catch(e => console.log);
 
 module.exports = server;
