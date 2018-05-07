@@ -4,6 +4,7 @@ const chai = require('chai');
 const assert = require('assert');
 const chaiHttp = require('chai-http');
 //const ioserver = require('../../ioserver');
+const workers = require('../../workers/index');
 const socket = require('socket.io-client');
 //const iosocket = require('socket.io').listen(3002);
 chai.use(chaiHttp);
@@ -37,7 +38,7 @@ describe('Websockets +bus', () => {
 			controller: 'core', 
 			action: 'bus',
 			channel: 'bus/core/ping',
-			message: hash
+			data: hash
 		});
 	});
 

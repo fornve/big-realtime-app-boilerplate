@@ -23,14 +23,24 @@ class ControllerCore {
 		//let reply_hash = Math.random().toString(36).substring(7);
         let reply_hash = data.client_id;
         let reply_channel = `/bus/reply/${reply_hash}`;
-		this.services.mb.createChannel(reply_channel).then(channel => {
-			console.log('channel to be finished');
+        data.reply_channel = reply_channel;
+		this.services.mb.createChannel().then(channel => {
+		    channel.assertQueue(reply_channel, {durable: false});
             Zookeeper.registerMBReplyChannel(data.client_id, reply_channel);
-		})
+
+            // 3. wait for response on reply channel
+            channel.consume(reply_channel, function(message) {
+               console.log(`RPC received data from ${reply_channel}`);
+               console.log(message.content.toString())
+            });
+		});
 
 		// 2. Emit message to bus
-		// 3. wait for response on reply channel
-		this.services.io.emit(data.reply, {pong: true});
+        this.services.mb.createChannel().then(channel => {
+            //channel.assertQueue(data.channel, {durable: false});
+            channel.sendToQueue(data.channel, new Buffer(JSON.stringify(data)));
+        });
+
 	}
 
 }
