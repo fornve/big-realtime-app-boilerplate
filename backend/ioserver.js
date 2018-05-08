@@ -2,7 +2,7 @@ const CoreController = require('./controllers/io/core');
 
 disconnect = (client, reason, services) => {
     console.log(`WS ${client.id} disconnected on ${reason}`);
-   // services.db.models.Zookeeper.dropAsync({client_id: client.id});
+    services.db.models.Zookeeper.destroy({ where: {client_id: client.id} });
 }
 
 socket = (services) => {

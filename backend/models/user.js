@@ -1,19 +1,21 @@
-module.exports = (orm, db) => {
-    return db.define(
-        'user',
-        {
-            name: String,
-            email: String,
-            password: String,
-        }, {
-            methods: {
-                test() {
-                    console.log(`Testing ${this.name} ${this.email}`);
-                }
-            },
-            validations: {
-                //email: orm.enforce.email()
-            },
-        }
-    );
+const Sequelize = require('sequelize');
+module.exports = (sequelize) => {
+    const User = sequelize.define('user', {
+        name: {
+            type: Sequelize.STRING
+        },
+        email: {
+            type: Sequelize.STRING
+        },
+        password: {
+            type: Sequelize.STRING
+        },
+    });
+
+    // force: true will drop the table if it already exists
+    User.sync({force: false}).then(() => {
+        // Table created
+    });
+
+    return User;
 };

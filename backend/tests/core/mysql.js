@@ -16,23 +16,4 @@ describe('MySQL ORM basics', function(){
             done();
 		});
 	});
-/*
-	it('Create', (done) => {
-	    let user = services.db.models.User.create({
-            name: chance.name(),
-            email: chance.email(),
-        });
-		done();
-	});
-
-	it('Get one', (done) => {
-	    services.db.models.User.get(1, (error, person) => {
-            console.log(person);
-            console.log(person.email);
-            console.log(JSON.parse(JSON.stringify(person)))
-        });
-        done();
-
-    });
-    */
 });

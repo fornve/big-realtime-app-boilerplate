@@ -1,17 +1,24 @@
-const orm = require('orm');
+const Sequelize = require('sequelize');
 const models = require('../models/index');
 
 module.exports = new Promise((resolve, reject) => {
     console.log('starting mysql');
-    orm.connectAsync('mysql://framework:framework@framework-mysql/framework')
-        .then(connection => {
-            console.log('Success connecting mysql');
-            connection.models = models(orm, connection);
-            //console.log(models);
-            resolve(connection)
-        })
-        .catch(e => {
-            console.log('Error connecting mysql');
-            reject(e);
-        });
+    let db = new Sequelize('framework', 'framework', 'framework', {
+        host: 'framework-mysql',
+        dialect: 'mysql',
+        operatorsAliases: false,
+
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        },
+    });
+
+    db.authenticate().then(() => {
+        console.log('Success connecting mysql');
+        db.models = models(db);
+        resolve(db)
+    })
 });

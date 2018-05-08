@@ -1,11 +1,8 @@
-module.exports = (orm, connection) => {
+module.exports = (db) => {
     let models = {
-        User: require('./user')(orm, connection),
-        Zookeeper: require('./zookeeper')(orm, connection),
+        User: require('./user')(db),
+        Zookeeper: require('./zookeeper')(db),
     }
-
-    models.User.syncPromise();
-    models.Zookeeper.syncPromise();
 
     return models;
 };
