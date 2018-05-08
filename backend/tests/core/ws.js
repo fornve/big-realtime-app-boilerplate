@@ -1,24 +1,22 @@
 /* global it, describe */
 
+const socket = require('socket.io-client');
 const chai = require('chai');
 const assert = require('assert');
 const chaiHttp = require('chai-http');
-const ioserver = require('../../ioserver');
-const socket = require('socket.io-client');
-const iosocket = require('socket.io').listen(3001);
+const service = require('../load-service');
 chai.use(chaiHttp);
-
 let io;
 
 describe('Websockets basics', () => {
 	before(() => {
-        require('../../services/init').then(services => {
-        	services.io = iosocket;
-            ioserver(services);
-        });
-		io = new socket('http://localhost:3001');
-		io.connect();
+        io = new socket('http://localhost:3001');
+        io.connect();
 	});
+
+	after(() => {
+		io.disconnect();
+	})
 
 	it('Connecting', (done) => {
 		setTimeout(() => {
@@ -28,7 +26,7 @@ describe('Websockets basics', () => {
 	});
 
 	it('Emiting', (done) => {
-		let result = io.emit('bus', { test: true });
+		io.emit('bus', { test: true });
 		done();
 	});
 

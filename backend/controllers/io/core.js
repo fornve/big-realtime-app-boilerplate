@@ -1,4 +1,3 @@
-const Zookeeper = require('../../models/zookeeper');
 class ControllerCore {
 	constructor(services) {
 		this.services = services;
@@ -17,21 +16,19 @@ class ControllerCore {
 		if(!data.reply) {
 			throw 'No reply address';
 		}
-		console.log('WS Listener for bus')
-		console.log(data);
+
 		// 1. Create reply channel in message broker (if does not exist)
-		//let reply_hash = Math.random().toString(36).substring(7);
         let reply_hash = data.client_id;
         let reply_channel = `/bus/reply/${reply_hash}`;
         data.reply_channel = reply_channel;
 		this.services.mb.createChannel().then(channel => {
 		    channel.assertQueue(reply_channel, {durable: false});
-            Zookeeper.registerMBReplyChannel(data.client_id, reply_channel);
+            //Zookeeper.registerMBReplyChannel(data.client_id, reply_channel);
 
             // 3. wait for response on reply channel
-            channel.consume(reply_channel, function(message) {
-               console.log(`RPC received data from ${reply_channel}`);
-               console.log(message.content.toString())
+            channel.consume(reply_channel, (message) => {
+                // 4. Reply to ws
+                this.services.io.emit(data.reply, JSON.parse(Buffer.from(message.content)));
             });
 		});
 
