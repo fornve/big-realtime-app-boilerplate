@@ -1,0 +1,7 @@
+[in progress] Keep one webhook connection for several RPC
+REST API Access log through rabbit
+RPC debugging markers and tracking flow in rabbit
+Teams and users models
+Basic frontend and dashbaord
+Webhook authentication
+

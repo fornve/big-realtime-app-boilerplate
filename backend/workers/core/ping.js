@@ -15,5 +15,5 @@ module.exports = async function(connection) {
 		/* ---- Work ends here ---- */
 
 		channel.sendToQueue(data.reply_channel, new Buffer(JSON.stringify(response)));
-	}, {noAck: true});
+	}, {noAck: false});
 };

@@ -3,7 +3,7 @@ const socket = require('socket.io');
 const ioserver = require('./ioserver');
 const workers = require('./workers/index');
 const app = express()
-const port = 8080;
+const port = 80;
 console.log('Starting server');
 app.get('/', (req, res) => res.send('Hello World!'))
 
@@ -15,5 +15,6 @@ require('./services/init').then(services => {
     ioserver(services);
     console.log('Server & WS started' );
 }).catch(e => console.log);
+
 
 module.exports = server;

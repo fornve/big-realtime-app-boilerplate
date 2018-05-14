@@ -6,7 +6,6 @@ disconnect = (client, reason, services) => {
 }
 
 socket = (services) => {
-
 	let controllers = {
 		'core': new CoreController(services),
 	};

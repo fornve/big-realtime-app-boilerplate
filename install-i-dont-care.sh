@@ -37,6 +37,7 @@ docker run -d \
 	-v ${path}/mysql:/var/lib/mysql \
 	mysql:5.7
 
+sleep 1
 docker run -d \
 	-p 15672:15672 \
 	--network framework \
@@ -44,12 +45,15 @@ docker run -d \
 	--name framework-rabbit \
 	rabbitmq:3
 
-docker exec -it framework-rabbit rabbitmq-plugins enable rabbitmq_management
-docker exec -it framework-rabbit rabbitmqctl add_user admin admin
-docker exec -it framework-rabbit rabbitmqctl set_user_tags admin administrator
+sleep 2
+docker exec -it framework-rabbit rabbitmq-plugins enable rabbitmq_management &&
+sleep 1
+docker exec -it framework-rabbit rabbitmqctl add_user admin admin &&
+docker exec -it framework-rabbit rabbitmqctl set_user_tags admin administrator &&
 docker exec -it framework-rabbit rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
 
 cd backend &&
+sleep 5
 docker build -t framework-backend . &&
 docker run -td --name framework-backend \
 	--network framework \

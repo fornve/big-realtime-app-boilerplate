@@ -26,7 +26,8 @@ function RPCReceive() {
 
 }
 
-describe('Websockets +bus', () => {
+describe('Websockets +bus', function() {
+    this.timeout(15000);
 	before(() => {
         io = new socket('http://localhost:3001');
         io.connect();
@@ -49,10 +50,10 @@ describe('Websockets +bus', () => {
             done();
         });
 	});
-/*
-	it('Receiving 100', done => {
+
+	it('Receiving 10 through one socket', done => {
 	    let jobs = [];
-	    for(let i = 0; i <= 100; i++) {
+	    for(let i = 0; i <= 10; i++) {
 	        jobs.push(RPCReceive());
         }
         Promise.all(jobs).then((data) => {
@@ -60,5 +61,5 @@ describe('Websockets +bus', () => {
             done();
         })
     });
-*/
+
 });
