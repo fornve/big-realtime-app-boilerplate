@@ -70,6 +70,8 @@ new Vue({
     // fetch menu from server
     this.$http.get('/menu').then(({data}) => {
       this.$store.commit('setMenu', data)
+    }).catch(error => {
+      console.log('Api error');
     })
     this.$store.dispatch('checkPageTitle', this.$route.path)
     this.$store.dispatch('checkAuth')

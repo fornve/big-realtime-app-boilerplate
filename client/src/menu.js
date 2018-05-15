@@ -1,16 +1,16 @@
 export default [
   { 'header': 'Admin' },
   { 'href': '/', 'title': 'Home', 'icon': 'home' },
-  { 'href': '/crud/types', 'title': 'Types', 'icon': 'view_list' },
-  { 'href': '/crud/posts', 'title': 'Posts', 'icon': 'view_list' },
-  { 'href': '/crud/posts/create', 'title': 'Create Post', 'icon': 'note_add' },
+  { 'href': '/crud/types', 'title': 'Watchdogs', 'icon': 'view_list' },
+  { 'href': '/crud/posts', 'title': 'Incidents', 'icon': 'view_list' },
+  { 'href': '/crud/posts/create', 'title': 'Add Incident', 'icon': 'note_add' },
 
-  { 'href': '/crud/comments', 'title': 'Comments', 'icon': 'view_list' },
+  { 'href': '/crud/billing', 'title': 'Billing', 'icon': 'view_list' },
   { 'href': '/crud/users', 'title': 'Users', 'icon': 'people' },
 
-  { 'href': '/chat', 'title': 'Chat', 'icon': 'chat' },
+  //{ 'href': '/chat', 'title': 'Chat', 'icon': 'chat' },
   {
-    'title': 'Pages',
+    'title': 'Help',
     'icon': 'domain',
     'items': [
       { 'href': '/example', 'title': 'Example' },

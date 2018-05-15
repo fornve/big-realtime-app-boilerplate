@@ -39,6 +39,7 @@ http.interceptors.response.use(function (response) {
     }
   }
   // Do something with response error
+  // console.log(error)
   return Promise.reject(error)
 })
 Vue.prototype.$http = http

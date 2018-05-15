@@ -1,15 +1,11 @@
 <template lang="pug">
 v-app(:dark="dark",standalone)
-  v-navigation-drawer(v-model='drawer',:mini-variant.sync="mini", persistent,enable-resize-watcher, :dark="dark")
+  v-navigation-drawer(v-model='drawer',:mini-variant.sync="mini", persistent, app, enable-resize-watcher, :dark="dark")
     .pa-3.text-xs-center(v-show="!mini")
-      div.display-2.py-4 Adminify
-      p {{$t('An admin dashboard based on Vuetify')}}
+      div.display-2.py-4 Watchify
+      p {{$t('A watchdog system which wake up when shit happens')}}
       div(style="padding-left:5em")
         v-switch(:label="(!dark ? 'Light' : 'Dark') + ' Theme'", v-model="dark", :dark="dark", hide-details)
-      div
-        v-btn(dark, tag="a", href="https://github.com/wxs77577/adminify", primary) 
-          v-icon(left, dark) star
-          span Github 
     .pa-3.text-xs-center(v-show="mini")
       .display-2 A
     v-divider
@@ -23,7 +19,7 @@ v-app(:dark="dark",standalone)
               v-list-tile-title {{ $t(item.title) }}
             v-list-tile-action
               v-icon() keyboard_arrow_down
-          
+
           v-list-tile(v-for='subItem in item.items', :key='subItem.href',:to='subItem.href', v-bind:router='!subItem.target', ripple, v-bind:disabled='subItem.disabled', v-bind:target='subItem.target')
             v-list-tile-action(v-if='subItem.icon')
               v-icon.success--text {{ subItem.icon }}
@@ -38,21 +34,10 @@ v-app(:dark="dark",standalone)
             v-list-tile-title {{ $t(item.title) }}
           v-list-tile-action(v-if='item.subAction')
             v-icon.success--text {{ item.subAction }}
-  v-toolbar.darken-1(fixed,dark,:class="theme") 
-    v-toolbar-side-icon(dark, @click.native.stop='drawer = !drawer')
+  v-toolbar.darken-1(fixed,dark,:class="theme")
+    v-toolbar-side-icon(dark, @click='drawer = !drawer')
     v-toolbar-title {{$t(pageTitle)}}
     v-spacer
-    v-menu(offset-y)
-      v-btn(icon, dark, slot="activator")
-        v-icon(dark) language
-      v-list
-        v-list-tile(v-for="lang in locales" :key="lang",@mouseover.native="changeLocale(lang)")
-          v-list-tile-title {{lang}}
-    v-menu(offset-y)
-      v-btn(icon, dark, slot="activator")
-        v-icon(dark) format_paint
-      v-list
-        v-list-tile(v-for="n in colors", :key="n", :class="n",@mouseover.native="theme = n")
   main
     v-container.pa-4(fluid)
         v-alert(v-bind='message', v-model='message.body', dismissible) {{message.body}}
