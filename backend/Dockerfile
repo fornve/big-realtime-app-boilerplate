@@ -16,4 +16,4 @@ RUN npm install -g nodemon mocha
 RUN npm install
 EXPOSE 80
 
-CMD nodemon index.js
+CMD ["nodemon", "index.js"]

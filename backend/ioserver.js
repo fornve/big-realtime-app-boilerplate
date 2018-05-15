@@ -24,9 +24,9 @@ socket = (services) => {
 			}
 		});
 
-        client.on('disconnect', (reason) => {
-            disconnect(client, reason, services);
-        });
+    client.on('disconnect', (reason) => {
+        disconnect(client, reason, services);
+    });
 	});
 
 	console.log('IO server started');

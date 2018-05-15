@@ -56,6 +56,7 @@ cd backend &&
 sleep 5
 docker build -t framework-backend . &&
 docker run -td --name framework-backend \
+	-p 8080:8080 \
 	--network framework \
     -e RABBITMQ=framework-rabbit \
     -e MYSQL=framework-mysql \

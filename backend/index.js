@@ -3,9 +3,11 @@ const socket = require('socket.io');
 const ioserver = require('./ioserver');
 const workers = require('./workers/index');
 const app = express()
-const port = 80;
+const port = 8080;
 console.log('Starting server');
 app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/api', (req, res) => res.send('Hello World!'))
+app.get('/socket.io/', (req, res) => res.send('Hello World!'))
 
 let server;
 
